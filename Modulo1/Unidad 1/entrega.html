@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <h1>Ejercicio 1</h1>
+    <form action="./nicolasPini.html" onSubmit="formValidations()">
+        Nombre: <input type="text" id="name"><br>
+        Apellido: <input type="text" id="lastname"><br>
+        Fecha de nacimiento: <input type="text" id="birthDate"><br>
+        Email: <input type="text" id="email"><br>
+        Telefono: <input type="text" id="phoneNumber"><br>
+        Usuario: <input type="text" id="username"><br>
+        Password: <input type="password" id="password"><br>
+        <button type="submit">Enviar</button>
+    </form>
+
+    <script type="text/javascript">
+        var form = document.querySelector("form");
+        form.addEventListener("submit", function(event) {
+            console.log("Se envio el siguiente formulario: ", form.elements);
+            event.preventDefault();
+        });
+
+        function formValidations(){
+            var name = document.getElementById('name').value;
+            var lastname = document.getElementById('lastname').value;
+            var birthDate = document.getElementById('birthDate').value;
+            var formatedBirthDate = birthDate.split("/");
+            var email = document.getElementById('email').value;
+            var phoneNumber = document.getElementById('phoneNumber').value;
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+            
+            // Validaciones
+            if(name == ''){
+                alert('Ingrese nombre');
+                return false;
+            }
+            if(lastname == ''){
+                alert('Ingrese apellido');
+                return false;
+            }
+            if(birthDate == ''){
+                alert('Ingresar fecha de nacimiento');
+                return false;
+            }
+            if(formatedBirthDate.length != 3){
+                alert('Ingresar fecha valida');
+                return false;
+            }
+            if(formatedBirthDate[0] == '' || formatedBirthDate[1] == '' || formatedBirthDate[2] == ''){
+                alert('Ingresar dia, mes y año');
+                return false;
+            }
+            if(email.search('@') == -1 && email.search('.com') == -1){
+                alert('Ingrese formato de email correcto');
+                return false;
+            }
+            var isnum = /^\d+$/.test(phoneNumber);  // Expresion regular que valida digitos en un string
+            if(isnum && phoneNumber.length != 0){
+                alert('Ingrese telefono nuevamente');
+                return false;
+            }
+            if(username.length <= 8){
+                alert('Ingrese usuario de mayor o igual a 8 letras');
+                return false;
+            }
+            if(password.length <= 8){
+                alert('La contraseña debe tener al menos 8 caracteres');
+                return false;
+            }
+        }
+    </script>
+</body>
+</html>
+

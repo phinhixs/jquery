@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Evaluacion Modulo 1 - Unidad 3</title>
+    <script type="text/javascript" src="jquery-1.10.2.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            // Ejercicio 1
+            function createBlocks() {
+                var totalBlocks = $("#images > img").length;
+                var left = 0;
+                for (var i = 1; i <= totalBlocks; i++) {
+                    var blockBorder = $("<div></div>").addClass("blockBorder");
+                    var block = $("<div></div>").prop("id", "block" + i);
+
+                    blockBorder.css("left", (i - 1) * 30);
+                    blockBorder.addClass("blockBorder");
+                    block.addClass("block");
+                    block.appendTo(blockBorder);
+                    blockBorder.appendTo("#blocks");
+                    console.log(block.prop("id") + " " + blockBorder.css("left"));
+                }
+            }
+
+            function animacion() {
+                $("#texto3").slideDown(4000, function() {
+                    $("#texto3").css("display", "none")
+                    $("#texto2").slideDown(4000, function() {
+                        $("#texto2").css("display", "none")
+                        $("#texto1").slideDown(4000, function() {
+                            $("#texto1").css("display", "none")
+
+                        })
+                    })
+                });
+
+                $("#block3").fadeIn(500);
+                $("#foto3").animate({
+                    "left": "+=600px"
+                }, 4000, function() {
+                    $("#block3").fadeOut(500);
+                    $("#block2").fadeIn(500);
+                    $("#foto2").animate({
+                        "left": "+=600px"
+                    }, 4000, function() {
+                        $("#block2").fadeOut(500);
+                        $("#block1").fadeIn(500);
+                        $("#foto1").animate({
+                            "left": "+=600px"
+                        }, 4000, function() {
+                            $("#block1").fadeOut(500);
+                            $("#foto3").css("left", "0")
+                            $("#foto2").css("left", "0")
+                            $("#foto1").css("left", "0")
+
+                            animacion();
+                        })
+                    })
+                });
+
+
+
+            }
+            createBlocks();
+            animacion();
+
+            // Ejercicio Nro 2
+            $("#container img").click(function() {
+                var nombre = $(this).attr("alt") + "_big";
+                var direccion = nombre + ".jpg";
+                var title = $(this).prop("title");
+
+                // Oculto botones
+                $("#menuEjercicios").css("display","none");
+
+                $("#title").css("width", $(nombre).css("width"));
+                $("#title").text(title);
+                $("#imgFull").attr('src', direccion);
+                $("#previa").fadeIn();
+            });
+
+            $("#close").click(function() {
+                $("#previa").fadeOut();
+                $("#menuEjercicios").css("display","block");
+            });
+
+
+            // Menu Ejercicios
+            $("#buttonEj2").click(function(){
+              $("#ejercicio1").css("display","none");
+              $("#ejercicio2").css("display","inline");
+            });
+            $("#buttonEj1").click(function(){
+              $("#ejercicio2").css("display","none");
+              $("#ejercicio1").css("display","inline");
+            });
+
+        });
+    </script>
+    <style type="text/css">
+        /* Ejercicio 1 */
+
+        #images {
+            margin: auto;
+            width: 600px;
+            height: 450px;
+            border: 1px solid grey;
+            position: relative;
+            overflow: hidden;
+            background-image: url(foto3.jpg);
+        }
+
+        #foto1,
+        #foto2,
+        #foto3 {
+            position: absolute;
+            display: block;
+        }
+
+        #blocks {
+            margin: auto;
+            width: 50%;
+            position: relative;
+            width: 100px;
+            height: 50px;
+            border: 1px solid grey;
+        }
+
+        .blockBorder {
+            position: absolute;
+            margin-left: 10px;
+            top: 30%;
+            border: 3px solid black;
+            width: 15px;
+            height: 15px;
+        }
+
+        .block {
+            position: absolute;
+            display: none;
+            width: 15px;
+            height: 15px;
+            background: rgb(128, 128, 128);
+            background-color: rgba(128, 128, 128, 1);
+        }
+
+        #texto1,
+        #texto2,
+        #texto3 {
+            display: none;
+            position: absolute;
+            text-align: center;
+            padding-top: 10px;
+            vertical-align: bottom;
+            background-color: #000000;
+            color: #FFFFFF;
+            opacity: 0.3;
+            width: 600px;
+            height: 30px;
+        }
+
+        /* Ejercicio 2 */
+        #container {
+            width: 650px;
+            margin: 150px auto;
+        }
+
+        #container img {
+            cursor: pointer;
+        }
+
+        #previa {
+            background: rgba(0, 0, 0, 0.5);
+            text-align: center;
+            display: none;
+            height: 100%;
+            left: 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            overflow: scroll;
+        }
+
+        #previa div {
+            position: relative;
+            border: 6px solid gray;
+            padding: 0;
+            margin: 10px 10px 0 10px;
+            /* text-align: center; */
+        }
+        #previa p {
+            position: relative;
+            padding: 10px;
+            text-align: center;
+            font-family: sans-serif;
+            width: 60%;
+            left: 20%;
+            bottom: 0;
+            border-radius: 14px;
+            background: rgba(0, 0, 0, 0.4);
+            color: white;
+        }
+        #close {
+            position: relative;
+            padding: 7px 7px 7px 7px;
+            background-color: rgb(0,0,0);
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 4px;
+            float: right;
+            top: 0;
+            right: 0;
+        }
+        #close:hover {
+          background: rgba(0, 0, 0, 0.6);
+        }
+
+        /*  Menu ejercicios */
+        #menuEjercicios {
+          position: fixed;
+          bottom: 0;
+          left: 25%;
+          display: block;
+          margin: auto;
+          text-align: center;
+          border: 1px solid gray;
+          background : url("fondo.png");
+          width: 50%;
+        }
+
+        .btn {
+            position: relative;
+            border-radius: 5px;
+            color: white;
+            padding: 14px 28px;
+            margin: 5px 30px;
+            cursor: pointer;
+        }
+        .info {background-color: #2196F3;} /* Blue */
+        .info:hover {background: #0b7dda;}
+
+    </style>
+</head>
+
+<body>
+    <div id="ejercicio1" style="display:none">
+        <div id="images">
+            <img src="foto1.jpg" id="foto1">
+            <img src="foto2.jpg" id="foto2">
+            <img src="foto3.jpg" id="foto3">
+            <div id="texto1">Esta es la descripcion de la foto 1</div>
+            <div id="texto2">Esta es la descripcion de la foto 2</div>
+            <div id="texto3">Esta es la descripcion de la foto 3</div>
+        </div>
+        <div id="blocks">
+        </div>
+    </div>
+    <div id="ejercicio2">
+        <div id="previa">
+            <div>
+                <img src="close.gif" id="close"/>
+                <img src="" id="imgFull" />
+            </div>
+            <p id="title">prueba</p>
+        </div>
+        <div id="container">
+            <img src="foto_1_small.jpg" alt="foto_1" title="Kevin Spacy" width="100" height="75" />
+            <img src="foto_2_small.jpg" alt="foto_2" title="MigagiYoda " width="100" height="75" />
+            <img src="foto_3_small.jpg" alt="foto_3" title="Jedinetor" width="100" height="75" />
+            <img src="foto_4_small.jpg" alt="foto_4" title="Princess Elijah" width="100" height="75" />
+            <img src="foto_5_small.jpg" alt="foto_5" title="Jedai" width="100" height="75" />
+            <img src="foto_6_small.jpg" alt="foto_6" title="Darth Homer" width="100" height="75" />
+        </div>
+    </div>
+    <div id="menuEjercicios">
+        <button class="btn info" id="buttonEj1">Ejercicio 1</button>
+        <button class="btn info" id="buttonEj2">Ejercicio 2</button>
+    </div>
+
+</body>
+
+</html>

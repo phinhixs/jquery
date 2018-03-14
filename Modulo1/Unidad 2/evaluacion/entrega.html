@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Modulo 1 - Unidad 2</title>
+    <script type="text/javascript" src="jquery-1.10.2.min.js"></script>
+    <style type="text/css">
+      html {
+        background: url(images/fondo1.jpg) no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+      }
+
+      .container{
+        margin-top: 10px;
+        -webkit-columns: 100px 2; /* Chrome, Safari, Opera */
+        -moz-columns: 100px 2; /* Firefox */
+        columns: 100px 2;
+      }
+      .container-right{
+        background-color: black;
+        opacity: 0.6;
+        margin: 5px 1px 1px 10px;
+        padding: 30px;
+        position: absolute;
+      }
+      .column-left{
+        margin: 5px 50px 10px 10px;
+      }
+      .column-right{
+        left: 400px;
+        margin: 5px 20px 10px 10px;
+      }
+      .left {
+        margin: 20px 20px;
+      }
+      .tip{
+         background-color: #ffcc99;
+         padding: 10px;
+         opacity: 0.7;
+         display: none;
+         position: absolute;
+      }
+
+      #logo{
+        display: none;
+      }
+      #rielamericano{
+        display: none;
+      }
+
+      #representante{
+        font-size: 1em;
+        font-family: tahoma, verdana, sans-serif;
+        color: white;
+        display: none;
+      }
+      #slogan{
+        font-size: 1.5em;
+        font-family: tahoma, verdana, sans-serif;
+        color: red;
+        display: none;
+      }
+      #texto{
+        font-size: 1em;
+        font-family: tahoma, verdana, sans-serif;
+        color: white;
+      }
+
+      #contacto{
+        font-size: 1em;
+        font-family: tahoma, verdana, sans-serif;
+        padding: 20px;
+        color: red;
+      }
+    </style>
+
+    <script type="text/javascript">
+      var lorenImpsu1 =
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque porttitor, erat ac facilisis ullamcorper," +
+      "tortor magna auctor arcu, ut sollicitudin risus urna a mi. Sed efficitur, tortor eu rhoncus mattis, " +
+      "nulla nisi eleifend nunc, at pellentesque ligula dolor sit amet enim. Sed aliquet et quam nec fringilla." +
+      " Etiam et pretium lectus. Nam hendrerit metus sem, id ultricies dui interdum eget. Pellentesque vitae vestibulum risus. " +
+      "Phasellus faucibus luctus tempor. Nam pulvinar nisi dolor, a euismod dolor facilisis quis. Sed iaculis nunc et metus efficitur faucibus." +
+      " Nam rutrum luctus quam, non finibus dolor bibendum id. Nullam molestie ultricies diam quis rutrum. Donec lacinia lorem quis lorem tincidunt," +
+      " sed tempor tellus vestibulum. Sed auctor malesuada enim at tincidunt.";
+
+      var lorenImpsu2 =
+      "Duis non laoreet turpis. Mauris eget tellus ullamcorper magna vulputate mollis at ac mauris. " +
+      "Nam in lorem condimentum, consectetur lacus sit amet, fermentum turpis. Vestibulum maximus, metus eu congue luctus, " +
+      "nibh metus venenatis augue, quis dignissim enim ligula sed ligula. Nullam ac gravida lacus. Nunc eu leo pulvinar, " +
+      "commodo velit et, condimentum quam. Phasellus lobortis id neque ut eleifend. Nunc finibus dolor elit, ac euismod " +
+      "felis porta volutpat. Curabitur sit amet tempus metus. Etiam   egestas lorem quis porttitor pretium. Sed interdum " +
+      "pellentesque convallis. Duis eget ligula lectus. Nam facilisis purus sed felis ullamcorper maximus nec eget odio." +
+      "Suspendisse potenti. Duis tincidunt vulputate felis, eu fermentum enim. Suspendisse ut aliquet mauris, ut elementum purus."
+
+      function slideDownLeft(){
+        $("#logo").slideDown(2000, function(){
+          $("#representante").slideDown(2000, function(){
+            $("#rielamericano").slideDown(2000, function(){
+              $("#slogan").slideDown(2000);
+            });
+          });
+        });
+      }
+
+      function fadeToRight(){
+        $(".column-right").fadeIn(1000);
+      }
+
+      $(document).ready(function(){
+        $(".column-right").fadeOut();
+        $("#representante").html("REPRESENTANTE<br>OFICIAL");
+        $("#slogan").html("MIRAR<br>TIENE<br>SENTIDO");
+        $("#texto").html(lorenImpsu1 + lorenImpsu2);
+        var contacto = $("#contacto");
+        contacto.html("Ver datos de contacto");
+
+        $("#contacto").mouseenter(function(e){
+           $("#tip").css("left", e.pageX - 100);
+           $("#tip").css("top", e.pageY - 100);
+           $("#tip").css("display", "block");
+        });
+        $("#contacto").mouseleave(function(e){
+           $("#tip").css("display", "none");
+        });
+
+        slideDownLeft();
+        fadeToRight();
+      });
+
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Columna Izquierda -->
+      <div class="column-left">
+        <div class="left" id="logo">
+          <img src="images/logo.png" id="logo" alt="">
+        </div>
+        <div class="left" id="representante"></div>
+        <div class="left" id="rielamericano">
+          <img src="images/rielamericano.png" id="rielamericano" alt="">
+        </div>
+        <div class="left" id="slogan"></div>
+      </div>
+
+      <!-- Columna Derecha -->
+      <div class="column-right">
+        <div class="container-right">
+          <div id="texto"></div>
+          <div id="contacto"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tip" id="tip">
+      <p>Mendoza 3456 - CABA</p><br>
+      54 11 4521-6778<br>
+      informes@misitio.com.ar<br>
+    </div>
+  </body>
+</html>

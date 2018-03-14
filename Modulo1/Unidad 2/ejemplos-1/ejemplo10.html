@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Trabajando con eventos</title>
+<script type="text/javascript" src="jquery-1.10.2.min.js"></script>
+<script>
+var numClics = 0;
+var numDobleClics = 0;
+
+$(document).ready(function(){
+
+   $("#micapa").dblclick(function(e){
+      numDobleClics++;
+      $("#mensaje").html("Has hecho doble-clic<br>" + "Número de clics: " + numClics + "<br>Número de doble clics: " + numDobleClics);
+   });
+   $("#micapa").click(function(e){
+      numClics++;
+      $("#mensaje").html("Has hecho clic<br>" + "Número de clics: " + numClics + "<br>Número de clics: " + numDobleClics);
+   });
+})
+</script>
+
+</head>
+<body>
+<h1>Trabajando con eventos en jQuery</h1>
+   <div id="micapa" style="padding: 10px; background-color: #ffcc99; width: 150px; float: left;">Hazme dobleclick</div>
+   <div id="mensaje" style="padding: 10px; margin-left: 180px;">Aquí voy a colocar mensajes para que los leas...</div>
+</body>
+</html>
